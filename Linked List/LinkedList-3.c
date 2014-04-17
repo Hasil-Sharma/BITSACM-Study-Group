@@ -1,11 +1,13 @@
 /* Simple linked list with integer attribute
 Method covered:
-Initialization, Addition, Deletion, Deletion of entire node*/
+Initialization, Addition, Deletion, Deletion of entire node
+*/
 
 #include <stdio.h>
 #include <stdlib.h>
 #define true 1
 static int size = 0;
+
 struct ListNode{
 	int n;
 	struct ListNode *next;
@@ -121,14 +123,14 @@ int main()
 	head->next = NULL;//we can't be sure about the garbage value assigned by default
 	printf("Orignal linked list\n");
 	print(start);//even after this call start still points to starting of list
-	printf("Inserting in the linked list, data & position")
+	printf("Inserting in the linked list, data & position\n");
 	scanf("%d %d",&d,&i);//i = 1 means starting of linkd list
 	InsertInLinkedList(&start,d,i);
 	print(start);
-	printf("Deletion from the linked list, position")
+	printf("Deletion from the linked list, position\n");
 	scanf("%d",&i);//deletion from position i
 	DeleteNodeLinkedList(&start,i);
 	print(start);
-	printf("Deleting the entire linked list")
+	printf("Deleting the entire linked list\n");
 	delete(&start);
 }
