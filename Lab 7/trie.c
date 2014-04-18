@@ -8,6 +8,7 @@ trie_node* createNewtrie();
 char* sanitize(char*);
 trie_node* insert(trie_node*,char*);
 void print(trie_node*);
+int search(trie_node*,char*);
 
 struct trie_node
 {
@@ -18,7 +19,7 @@ struct trie_node
 int main()
 {
 	char word[1000],*stword;
-	int wordnum = 0,hashNum;
+	int wordnum = 0,boolean;
 	trie_node* root = NULL;
 	FILE *fptr;
 	fptr = fopen("new.txt","r");
@@ -28,6 +29,17 @@ int main()
 		//printf("Inserting word: %s\n",stword);
 		root = insert(root,stword);
 		//printf("%s :%d\n",stword,hashNum);
+	}
+	printf("Start inserting words\n");
+	while(1)
+	{
+		scanf("%s",word);
+		boolean = search(root,word);
+		if(boolean)
+		{
+			printf("Yes\n");
+		}
+		else printf("No\n");
 	}
 	return 0;
 }
@@ -39,7 +51,7 @@ trie_node* createNewtrie()
 	root->boolean = 0;
 	for(i = 0; i < 26; i++)
 		root->children[i] = NULL;
-	print(root);
+	//print(root);
 	return root;
 }
 char *sanitize(char *word)
@@ -63,7 +75,7 @@ trie_node* insert(trie_node* root,char* word)
 {
 	int index;
 	index = word[0] - 'a';
-	printf("inserting: %c\n",word[0]);
+	//printf("inserting: %c\n",word[0]);
 	if(word[0] == '\0')
 	{
 		//making it a leaf node
@@ -89,4 +101,19 @@ trie_node* insert(trie_node* root,char* word)
 	}
 
 	return root;
+}
+
+int search(trie_node* root, char* word)
+{
+	int len = strlen(word),i,index;
+	for(i = 0;i < len; i++)
+	{
+		index  = word[i] - 'a';
+		if(root->children[index] == NULL)
+		{
+			return 0;
+		}
+		root = root->children[index];
+	}
+	return 1;
 }
