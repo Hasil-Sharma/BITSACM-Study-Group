@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #define mod 511
+
 typedef struct linkedList linkedList;
 typedef struct chainNode chainNode;
 typedef struct hashTable hashTable;
@@ -79,6 +80,8 @@ char *sanitize(char *word)
 	{
 		if((word[i] >= 65 && word[i] <= 90) || (word[i] >= 97 && word[i] <= 122))
 		{
+			if(word[i] >= 'A' && word[i] <= 'Z')
+				word[i] += 32;
 			nword[j++] = word[i];
 		}
 	}
