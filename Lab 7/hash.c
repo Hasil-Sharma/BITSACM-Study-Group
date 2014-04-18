@@ -31,6 +31,7 @@ struct chainNode
 struct hashTable
 {
 	chainNode** start;//pointer to an array of pointers essentially
+	//alternatively we can make another structure, but why not to use the power pointers give
 };
 
 
