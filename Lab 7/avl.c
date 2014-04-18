@@ -18,7 +18,7 @@ int height(avltreenode*);
 int max(int,int);
 avltreenode* rightrotate(avltreenode*);
 avltreenode* lefrotate(avltreenode*);
-
+void populateSucc(avltreenode*);
 struct linkedlist{
 	int value;
 	linkedlist* next;
@@ -51,6 +51,7 @@ int main()
 		//but this logic is much more intuitive
 	}
 	fclose(fptr);
+	populateSucc(root);
 	inOrder(root);
 	printf("Height of tree: %d\n",root->height);
 	return 0;
@@ -157,11 +158,10 @@ int compare(char* a, char* b)
 }
 void inOrder(avltreenode* root)
 {
-	if(root)
+	while(root)
 	{
-		inOrder(root->left);
 		visit(root);
-		inOrder(root->right);
+		root = root->succ;
 	}
 }
 
@@ -218,4 +218,16 @@ avltreenode* lefrotate(avltreenode* root)
 	x->height = max(height(root->left),height(root->right))+1;
 
 	return x;
+}
+
+void populateSucc(avltreenode* root)
+{
+	static avltreenode* next = NULL;
+	if(root)
+	{
+		populateSucc(root->right);
+		root->succ = next;
+		next = root;
+		populateSucc(root->left);
+	}
 }
